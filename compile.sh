@@ -8,27 +8,25 @@ while getopts j:d:u o
 done
 
 #executes update to ensure .h files
-sh update.sh
-cd python
-cp ../*.h .
-
 rm -rf output
 mkdir output
-mkdir output/include
-
-cp ../*.h output/include/
+mkdir output/includes
 
 OS=`uname -s`
 if test "$OS" = "Darwin"; then
-cp ../../../build/usr/lib/libdjon-client.0.dylib ../../obj/usr/lib/libdjon-client.dylib output/
+cp /usr/lib/libdjon-client.0.dylib /usr/lib/libdjon-client.dylib output/
 else
-cp ../../../build/usr/lib/libdjon-client.so output/
+cp /usr/lib/libdjon-client.so output/
 fi
 
-swig -c++ -python -outdir output -o output/djonpythondriver.cpp ../driver-python.i
-
+cp includes/*.h output/includes/
 cp setup.py output/
+cp pydjondb.py output/
 cp MANIFEST.in output/
+cp *.cpp output/
+
+cd output
+python setup.py build
 
 if [ ! -z "${UPLOAD}" ]; 
 then
