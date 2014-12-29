@@ -7,5 +7,8 @@ con.insert("testpython", "testns", "{ 'name': 'John' }");
 
 res = con.find("testpython", "testns", "");
 
-print res.toChar();
+res.next();
+obj = res.current();
+
+print obj.toChar();
 
