@@ -362,6 +362,27 @@ class DjondbConnection(_object):
 DjondbConnection_swigregister = _pydjondb.DjondbConnection_swigregister
 DjondbConnection_swigregister(DjondbConnection)
 
+class DjondbCursor(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, DjondbCursor, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, DjondbCursor, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = _pydjondb.new_DjondbCursor(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _pydjondb.delete_DjondbCursor
+    __del__ = lambda self : None;
+    def next(self): return _pydjondb.DjondbCursor_next(self)
+    def previous(self): return _pydjondb.DjondbCursor_previous(self)
+    def current(self): return _pydjondb.DjondbCursor_current(self)
+    def length(self): return _pydjondb.DjondbCursor_length(self)
+    def releaseCursor(self): return _pydjondb.DjondbCursor_releaseCursor(self)
+    def seek(self, *args): return _pydjondb.DjondbCursor_seek(self, *args)
+DjondbCursor_swigregister = _pydjondb.DjondbCursor_swigregister
+DjondbCursor_swigregister(DjondbCursor)
+
 class ConnectionReference(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, ConnectionReference, name, value)

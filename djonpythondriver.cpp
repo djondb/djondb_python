@@ -2958,37 +2958,40 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_BSONObj swig_types[3]
 #define SWIGTYPE_p_BSONParser swig_types[4]
 #define SWIGTYPE_p_BSONTYPE swig_types[5]
-#define SWIGTYPE_p_ParseException swig_types[6]
-#define SWIGTYPE_p___int32 swig_types[7]
-#define SWIGTYPE_p___int64 swig_types[8]
-#define SWIGTYPE_p_allocator_type swig_types[9]
-#define SWIGTYPE_p_char swig_types[10]
-#define SWIGTYPE_p_const_iterator swig_types[11]
-#define SWIGTYPE_p_const_reference swig_types[12]
-#define SWIGTYPE_p_difference_type swig_types[13]
-#define SWIGTYPE_p_djondb__ConnectionReference swig_types[14]
-#define SWIGTYPE_p_djondb__DjondbConnection swig_types[15]
-#define SWIGTYPE_p_djondb__DjondbConnectionManager swig_types[16]
-#define SWIGTYPE_p_djondb__DjondbCursor swig_types[17]
-#define SWIGTYPE_p_iterator swig_types[18]
-#define SWIGTYPE_p_p_PyObject swig_types[19]
-#define SWIGTYPE_p_reference swig_types[20]
-#define SWIGTYPE_p_size_type swig_types[21]
-#define SWIGTYPE_p_std__allocatorT_BSONObj_p_t swig_types[22]
-#define SWIGTYPE_p_std__allocatorT_std__string_t swig_types[23]
-#define SWIGTYPE_p_std__exception swig_types[24]
-#define SWIGTYPE_p_std__invalid_argument swig_types[25]
-#define SWIGTYPE_p_std__mapT_std__string_BSONContent_p_t__const_iterator swig_types[26]
-#define SWIGTYPE_p_std__setT_std__string_t swig_types[27]
-#define SWIGTYPE_p_std__vectorT_BSONObj_p_std__allocatorT_BSONObj_p_t_t swig_types[28]
-#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[29]
-#define SWIGTYPE_p_std__vectorT__Tp_p__Alloc_t swig_types[30]
-#define SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t swig_types[31]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[32]
-#define SWIGTYPE_p_value_type swig_types[33]
-#define SWIGTYPE_p_void swig_types[34]
-static swig_type_info *swig_types[36];
-static swig_module_info swig_module = {swig_types, 35, 0, 0, 0, 0};
+#define SWIGTYPE_p_CommandWriter swig_types[6]
+#define SWIGTYPE_p_NetworkInputStream swig_types[7]
+#define SWIGTYPE_p_NetworkOutputStream swig_types[8]
+#define SWIGTYPE_p_ParseException swig_types[9]
+#define SWIGTYPE_p___int32 swig_types[10]
+#define SWIGTYPE_p___int64 swig_types[11]
+#define SWIGTYPE_p_allocator_type swig_types[12]
+#define SWIGTYPE_p_char swig_types[13]
+#define SWIGTYPE_p_const_iterator swig_types[14]
+#define SWIGTYPE_p_const_reference swig_types[15]
+#define SWIGTYPE_p_difference_type swig_types[16]
+#define SWIGTYPE_p_djondb__ConnectionReference swig_types[17]
+#define SWIGTYPE_p_djondb__DjondbConnection swig_types[18]
+#define SWIGTYPE_p_djondb__DjondbConnectionManager swig_types[19]
+#define SWIGTYPE_p_djondb__DjondbCursor swig_types[20]
+#define SWIGTYPE_p_iterator swig_types[21]
+#define SWIGTYPE_p_p_PyObject swig_types[22]
+#define SWIGTYPE_p_reference swig_types[23]
+#define SWIGTYPE_p_size_type swig_types[24]
+#define SWIGTYPE_p_std__allocatorT_BSONObj_p_t swig_types[25]
+#define SWIGTYPE_p_std__allocatorT_std__string_t swig_types[26]
+#define SWIGTYPE_p_std__exception swig_types[27]
+#define SWIGTYPE_p_std__invalid_argument swig_types[28]
+#define SWIGTYPE_p_std__mapT_std__string_BSONContent_p_t__const_iterator swig_types[29]
+#define SWIGTYPE_p_std__setT_std__string_t swig_types[30]
+#define SWIGTYPE_p_std__vectorT_BSONObj_p_std__allocatorT_BSONObj_p_t_t swig_types[31]
+#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[32]
+#define SWIGTYPE_p_std__vectorT__Tp_p__Alloc_t swig_types[33]
+#define SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t swig_types[34]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[35]
+#define SWIGTYPE_p_value_type swig_types[36]
+#define SWIGTYPE_p_void swig_types[37]
+static swig_type_info *swig_types[39];
+static swig_module_info swig_module = {swig_types, 38, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3466,17 +3469,16 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <vector>
 
 
-#define SWIG_FILE_WITH_INIT
-#include "bsonarrayobj.h"
-#include "bson.h"
-#include "bsonobj.h"
-#include "bsonparser.h"
-#include "filterdefs.h"
-#include "bsonutil.h"
-#include "djondbconnection.h"
-#include "djondbcursor.h"
-#include "djondbconnectionmanager.h"
-#include "djondb_client.h"
+#include "includes/bsonarrayobj.h"
+#include "includes/bson.h"
+#include "includes/bsonobj.h"
+#include "includes/bsonparser.h"
+#include "includes/filterdefs.h"
+#include "includes/bsonutil.h"
+#include "includes/djondbconnection.h"
+#include "includes/djondbcursor.h"
+#include "includes/djondbconnectionmanager.h"
+#include "includes/djondb_client.h"
 
 
 namespace swig {  
@@ -13813,6 +13815,323 @@ SWIGINTERN PyObject *DjondbConnection_swigregister(PyObject *SWIGUNUSEDPARM(self
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_DjondbCursor__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  NetworkOutputStream *arg1 = (NetworkOutputStream *) 0 ;
+  NetworkInputStream *arg2 = (NetworkInputStream *) 0 ;
+  CommandWriter *arg3 = (CommandWriter *) 0 ;
+  char *arg4 = (char *) 0 ;
+  BSONArrayObj *arg5 = (BSONArrayObj *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  int res4 ;
+  char *buf4 = 0 ;
+  int alloc4 = 0 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
+  djondb::DjondbCursor *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOOO:new_DjondbCursor",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetworkOutputStream, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_DjondbCursor" "', argument " "1"" of type '" "NetworkOutputStream *""'"); 
+  }
+  arg1 = reinterpret_cast< NetworkOutputStream * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_NetworkInputStream, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_DjondbCursor" "', argument " "2"" of type '" "NetworkInputStream *""'"); 
+  }
+  arg2 = reinterpret_cast< NetworkInputStream * >(argp2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3,SWIGTYPE_p_CommandWriter, 0 |  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_DjondbCursor" "', argument " "3"" of type '" "CommandWriter *""'"); 
+  }
+  arg3 = reinterpret_cast< CommandWriter * >(argp3);
+  res4 = SWIG_AsCharPtrAndSize(obj3, &buf4, NULL, &alloc4);
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_DjondbCursor" "', argument " "4"" of type '" "char const *""'");
+  }
+  arg4 = reinterpret_cast< char * >(buf4);
+  res5 = SWIG_ConvertPtr(obj4, &argp5,SWIGTYPE_p_BSONArrayObj, 0 |  0 );
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_DjondbCursor" "', argument " "5"" of type '" "BSONArrayObj *""'"); 
+  }
+  arg5 = reinterpret_cast< BSONArrayObj * >(argp5);
+  result = (djondb::DjondbCursor *)new djondb::DjondbCursor(arg1,arg2,arg3,(char const *)arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_djondb__DjondbCursor, SWIG_POINTER_NEW |  0 );
+  if (alloc4 == SWIG_NEWOBJ) delete[] buf4;
+  return resultobj;
+fail:
+  if (alloc4 == SWIG_NEWOBJ) delete[] buf4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_DjondbCursor__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  djondb::DjondbCursor *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  djondb::DjondbCursor *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_DjondbCursor",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_djondb__DjondbCursor,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_DjondbCursor" "', argument " "1"" of type '" "djondb::DjondbCursor const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_DjondbCursor" "', argument " "1"" of type '" "djondb::DjondbCursor const &""'"); 
+  }
+  arg1 = reinterpret_cast< djondb::DjondbCursor * >(argp1);
+  result = (djondb::DjondbCursor *)new djondb::DjondbCursor((djondb::DjondbCursor const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_djondb__DjondbCursor, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_DjondbCursor(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 5) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_djondb__DjondbCursor, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_DjondbCursor__SWIG_1(self, args);
+    }
+  }
+  if (argc == 5) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_NetworkOutputStream, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_NetworkInputStream, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        void *vptr = 0;
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_CommandWriter, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          int res = SWIG_AsCharPtrAndSize(argv[3], 0, NULL, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            void *vptr = 0;
+            int res = SWIG_ConvertPtr(argv[4], &vptr, SWIGTYPE_p_BSONArrayObj, 0);
+            _v = SWIG_CheckState(res);
+            if (_v) {
+              return _wrap_new_DjondbCursor__SWIG_0(self, args);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_DjondbCursor'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    djondb::DjondbCursor::DjondbCursor(NetworkOutputStream *,NetworkInputStream *,CommandWriter *,char const *,BSONArrayObj *)\n"
+    "    djondb::DjondbCursor::DjondbCursor(djondb::DjondbCursor const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_DjondbCursor(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  djondb::DjondbCursor *arg1 = (djondb::DjondbCursor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_DjondbCursor",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_djondb__DjondbCursor, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DjondbCursor" "', argument " "1"" of type '" "djondb::DjondbCursor *""'"); 
+  }
+  arg1 = reinterpret_cast< djondb::DjondbCursor * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DjondbCursor_next(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  djondb::DjondbCursor *arg1 = (djondb::DjondbCursor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:DjondbCursor_next",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_djondb__DjondbCursor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DjondbCursor_next" "', argument " "1"" of type '" "djondb::DjondbCursor *""'"); 
+  }
+  arg1 = reinterpret_cast< djondb::DjondbCursor * >(argp1);
+  result = (bool)(arg1)->next();
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DjondbCursor_previous(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  djondb::DjondbCursor *arg1 = (djondb::DjondbCursor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:DjondbCursor_previous",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_djondb__DjondbCursor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DjondbCursor_previous" "', argument " "1"" of type '" "djondb::DjondbCursor *""'"); 
+  }
+  arg1 = reinterpret_cast< djondb::DjondbCursor * >(argp1);
+  result = (bool)(arg1)->previous();
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DjondbCursor_current(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  djondb::DjondbCursor *arg1 = (djondb::DjondbCursor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  BSONObj *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:DjondbCursor_current",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_djondb__DjondbCursor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DjondbCursor_current" "', argument " "1"" of type '" "djondb::DjondbCursor *""'"); 
+  }
+  arg1 = reinterpret_cast< djondb::DjondbCursor * >(argp1);
+  result = (BSONObj *)(arg1)->current();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_BSONObj, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DjondbCursor_length(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  djondb::DjondbCursor *arg1 = (djondb::DjondbCursor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  __int32 result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:DjondbCursor_length",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_djondb__DjondbCursor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DjondbCursor_length" "', argument " "1"" of type '" "djondb::DjondbCursor *""'"); 
+  }
+  arg1 = reinterpret_cast< djondb::DjondbCursor * >(argp1);
+  result = (arg1)->length();
+  resultobj = SWIG_NewPointerObj((new __int32(static_cast< const __int32& >(result))), SWIGTYPE_p___int32, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DjondbCursor_releaseCursor(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  djondb::DjondbCursor *arg1 = (djondb::DjondbCursor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:DjondbCursor_releaseCursor",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_djondb__DjondbCursor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DjondbCursor_releaseCursor" "', argument " "1"" of type '" "djondb::DjondbCursor *""'"); 
+  }
+  arg1 = reinterpret_cast< djondb::DjondbCursor * >(argp1);
+  (arg1)->releaseCursor();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DjondbCursor_seek(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  djondb::DjondbCursor *arg1 = (djondb::DjondbCursor *) 0 ;
+  __int32 arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:DjondbCursor_seek",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_djondb__DjondbCursor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DjondbCursor_seek" "', argument " "1"" of type '" "djondb::DjondbCursor *""'"); 
+  }
+  arg1 = reinterpret_cast< djondb::DjondbCursor * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p___int32,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DjondbCursor_seek" "', argument " "2"" of type '" "__int32""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DjondbCursor_seek" "', argument " "2"" of type '" "__int32""'");
+    } else {
+      __int32 * temp = reinterpret_cast< __int32 * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (arg1)->seek(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *DjondbCursor_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_djondb__DjondbCursor, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_ConnectionReference__connection_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   djondb::ConnectionReference *arg1 = (djondb::ConnectionReference *) 0 ;
@@ -14280,6 +14599,15 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"DjondbConnection_namespaces", _wrap_DjondbConnection_namespaces, METH_VARARGS, NULL},
 	 { (char *)"DjondbConnection_host", _wrap_DjondbConnection_host, METH_VARARGS, NULL},
 	 { (char *)"DjondbConnection_swigregister", DjondbConnection_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_DjondbCursor", _wrap_new_DjondbCursor, METH_VARARGS, NULL},
+	 { (char *)"delete_DjondbCursor", _wrap_delete_DjondbCursor, METH_VARARGS, NULL},
+	 { (char *)"DjondbCursor_next", _wrap_DjondbCursor_next, METH_VARARGS, NULL},
+	 { (char *)"DjondbCursor_previous", _wrap_DjondbCursor_previous, METH_VARARGS, NULL},
+	 { (char *)"DjondbCursor_current", _wrap_DjondbCursor_current, METH_VARARGS, NULL},
+	 { (char *)"DjondbCursor_length", _wrap_DjondbCursor_length, METH_VARARGS, NULL},
+	 { (char *)"DjondbCursor_releaseCursor", _wrap_DjondbCursor_releaseCursor, METH_VARARGS, NULL},
+	 { (char *)"DjondbCursor_seek", _wrap_DjondbCursor_seek, METH_VARARGS, NULL},
+	 { (char *)"DjondbCursor_swigregister", DjondbCursor_swigregister, METH_VARARGS, NULL},
 	 { (char *)"ConnectionReference__connection_set", _wrap_ConnectionReference__connection_set, METH_VARARGS, NULL},
 	 { (char *)"ConnectionReference__connection_get", _wrap_ConnectionReference__connection_get, METH_VARARGS, NULL},
 	 { (char *)"ConnectionReference__references_set", _wrap_ConnectionReference__references_set, METH_VARARGS, NULL},
@@ -14307,6 +14635,9 @@ static swig_type_info _swigt__p_BSONException = {"_p_BSONException", "BSONExcept
 static swig_type_info _swigt__p_BSONObj = {"_p_BSONObj", "std::vector< BSONObj * >::value_type|BSONObj *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_BSONParser = {"_p_BSONParser", "BSONParser *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_BSONTYPE = {"_p_BSONTYPE", "BSONTYPE *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_CommandWriter = {"_p_CommandWriter", "CommandWriter *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_NetworkInputStream = {"_p_NetworkInputStream", "NetworkInputStream *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_NetworkOutputStream = {"_p_NetworkOutputStream", "NetworkOutputStream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ParseException = {"_p_ParseException", "ParseException *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p___int32 = {"_p___int32", "__int32 *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p___int64 = {"_p___int64", "__int64 *", 0, 0, (void*)0, 0};
@@ -14344,6 +14675,9 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_BSONObj,
   &_swigt__p_BSONParser,
   &_swigt__p_BSONTYPE,
+  &_swigt__p_CommandWriter,
+  &_swigt__p_NetworkInputStream,
+  &_swigt__p_NetworkOutputStream,
   &_swigt__p_ParseException,
   &_swigt__p___int32,
   &_swigt__p___int64,
@@ -14381,6 +14715,9 @@ static swig_cast_info _swigc__p_BSONException[] = {  {&_swigt__p_BSONException, 
 static swig_cast_info _swigc__p_BSONObj[] = {  {&_swigt__p_BSONObj, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_BSONParser[] = {  {&_swigt__p_BSONParser, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_BSONTYPE[] = {  {&_swigt__p_BSONTYPE, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CommandWriter[] = {  {&_swigt__p_CommandWriter, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_NetworkInputStream[] = {  {&_swigt__p_NetworkInputStream, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_NetworkOutputStream[] = {  {&_swigt__p_NetworkOutputStream, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ParseException[] = {  {&_swigt__p_ParseException, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p___int32[] = {  {&_swigt__p___int32, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p___int64[] = {  {&_swigt__p___int64, 0, 0, 0},{0, 0, 0, 0}};
@@ -14418,6 +14755,9 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_BSONObj,
   _swigc__p_BSONParser,
   _swigc__p_BSONTYPE,
+  _swigc__p_CommandWriter,
+  _swigc__p_NetworkInputStream,
+  _swigc__p_NetworkOutputStream,
   _swigc__p_ParseException,
   _swigc__p___int32,
   _swigc__p___int64,
