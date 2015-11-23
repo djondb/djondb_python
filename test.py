@@ -12,3 +12,9 @@ obj = res.current();
 
 print obj.toChar();
 
+
+try:
+	con.update("testpython", "testns", "{ '_id': '1234', '_revision': '1234' }");
+except e:
+	print(e)
+

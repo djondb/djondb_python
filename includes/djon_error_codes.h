@@ -30,9 +30,15 @@
 // 100 is reserved for database errors
 const int D_ERROR_TOO_MANY_RESULTS = 100;
 const int D_ERROR_PARSEERROR = 101;
+const int D_ERROR_NOTIMPLEMENTED = 102; //!< Elements not supported yet
+
+// 200 is reserved for system errors, these errors should be checked in development if reported
+const int D_ERROR_UNKNOWN = 200; //!< Reserved for null pointers
 
 // 600 is reserved for user errors
 const int D_ERROR_CONNECTION = 600;
 const int D_ERROR_INVALID_STATEMENT = 601;
+const int D_ERROR_MISSING_PARAMETERS = 602;
+const int D_ERROR_UPDATE_FAILED = 603;
 
 #endif /* DJON_ERROR_CODES_INCLUDED_H */

@@ -6,6 +6,7 @@
 #include "util.h"
 #include "dtime.h"
 #include <ctime>
+#include <map>
 #ifndef WINDOWS
 #include <time.h>
 #else
@@ -32,19 +33,21 @@ class Logger {
 			bool m_info;
 			bool m_warn;
 			int _detail;
-
+			char* m_clazz;
 		};
-		void* m_clazz;
-		static Config* _configSettings;
+		const char* _clazz;
+		Config* _configSettings;
 
 		int _interval;
 		struct timespec _ts1;
 		struct timespec _ts2;
 		bool _timerRunning;
+		static std::map<std::string, Logger*> _loggers;
 
 	private:
+		Logger();
 		void print(std::string type, std::string message);
-		Logger(void* clazz);
+		void initialize(const char* clazz);
 
 	public:
 		virtual ~Logger();
@@ -63,7 +66,7 @@ class Logger {
 
 		DTime recordedTime();
 
-		static Logger* const getLogger(void* clazz);
+		static Logger* const getLogger(const char* clazz);
 		static void deleteLogger();
 };
 

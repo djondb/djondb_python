@@ -19,6 +19,7 @@
 #include "settings.h"
 #include "circular_queue.h"
 #include "djon_error_codes.h"
+#include "defs.h"
 
 #include <string>
 #include <vector>
