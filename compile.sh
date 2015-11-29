@@ -14,7 +14,7 @@ mkdir output/includes
 
 OS=`uname -s`
 if test "$OS" = "Darwin"; then
-cp /usr/lib/libdjon-client.0.dylib /usr/lib/libdjon-client.dylib output/
+cp /usr/lib/libdjon-client.dylib /usr/lib/libdjon-client.dylib output/
 else
 cp /usr/lib/libdjon-client.so output/
 fi
