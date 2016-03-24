@@ -51,7 +51,7 @@ class StreamManager {
 		  std::vector<std::string>* dbs() const;
 		  std::vector<std::string>* namespaces(const char* db) const;
 		void saveDatabases();
-		void closeDatabases();
+		void shutdown();
 		bool dropNamespace(const char* db, const char* ns);
 		void setDataDir(const std::string& dataDir);
 

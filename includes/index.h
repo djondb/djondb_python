@@ -34,6 +34,7 @@ class IndexAlgorithm {
 			_indexName = strcpy(indexName, strlen(indexName));
 			_db = NULL;
 			_ns = NULL;
+			_unique = true;
 		}
 
 		virtual ~IndexAlgorithm() {
@@ -47,9 +48,9 @@ class IndexAlgorithm {
 
 		virtual void add(const BSONObj& elem, djondb::string documentId, long filePos) = 0;
 		virtual bool update(const BSONObj& elem, djondb::string documentId, long filePos) = 0;
-		virtual Index* find(BSONObj* const elem) = 0;
-		virtual void remove(const BSONObj& elem) = 0;
-		virtual std::list<Index*> find(BaseExpression* filterExpr) = 0;
+		virtual Index const* find(BSONObj* const elem) = 0;
+		virtual bool remove(const BSONObj& elem) = 0;
+		virtual std::list<Index const*> find(BaseExpression* filterExpr) = 0;
 
 		virtual const std::set<std::string> keys() const {
 			return _keys;
@@ -82,6 +83,14 @@ class IndexAlgorithm {
 			_ns = strcpy(ns);
 		}
 
+		const bool unique() const {
+			return _unique;
+		}
+
+		void setUnique(bool u) {
+			_unique = u;
+		}
+
 		const char* ns() const {
 			return _ns;
 		}
@@ -95,6 +104,7 @@ class IndexAlgorithm {
 		char* _db;
 		char* _ns;
 		char* _indexName;
+		bool _unique;
 };
 
 #endif // INDEX_H_INCLUDED

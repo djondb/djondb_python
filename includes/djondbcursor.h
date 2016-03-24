@@ -51,7 +51,8 @@ namespace djondb {
 	{
 		enum CursorStatus {
 			CS_LOADING, //!< Cursor is still loading
-			CS_RECORDS_LOADED //!< All the records are ready, it's now a client side cursor
+			CS_RECORDS_LOADED, //!< All the records are ready, it's now a client side cursor
+			CS_CLOSED //!< The cursor has been released and it's not usable
 		};
 
 		public:

@@ -33,8 +33,8 @@ class DBController: public Controller
 
         const BSONObj* insert(const char* db, const char* ns, BSONObj* bson, const BSONObj* options = NULL);
 		  bool dropNamespace(const char* db, const char* ns, const BSONObj* options = NULL);
-        void update(const char* db, const char* ns, BSONObj* bson, const BSONObj* options = NULL);
-        void remove(const char* db, const char* ns, const char* documentId, const char* revision, const BSONObj* options = NULL);
+        virtual bool update(const char* db, const char* ns, BSONObj* bson, const BSONObj* options = NULL);
+        virtual bool remove(const char* db, const char* ns, const char* documentId, const char* revision, const BSONObj* options = NULL);
         virtual DBCursor* const find(const char* db, const char* ns, const char* select, const char* filter, const BSONObj* options = NULL) throw (ParseException);
 		  virtual DBCursor* const fetchCursor(const char* cursorId);
 
@@ -83,7 +83,7 @@ class DBController: public Controller
 		  BSONArrayObj* findFullScan(const char* db, const char* ns, const char* select, FilterParser* parser, const BSONObj* options) throw (ParseException);
 		  void clearCache();
 		  long checkStructure(BSONObj* bson);
-		  Index* findIndex(const char* db, const char* ns, BSONObj* bson);
+		  Index const* findIndex(const char* db, const char* ns, BSONObj* bson);
 		  void insertIndex(IndexAlgorithm* impl, BSONObj* bson, long filePos);
 		  void insertIndexes(const char* db, const char* ns, BSONObj* bson, long filePos);
 		  void updateIndex(const char* db, const char* ns, BSONObj* bson, long filePos);
@@ -102,6 +102,8 @@ class DBController: public Controller
 		  bool readNextPage(DBCursor* cursor);
 
 		  void migrate033(const char* db, const char* ns);
+		  // Upon initialization this checks that the primary key indexes exist
+		  void checkIndexes();
 };
 
 #endif // DBCONTROLLER_H

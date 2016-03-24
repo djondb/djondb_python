@@ -17,6 +17,13 @@
 #define stat _stat
 #endif
 
+
+FILE* fopendebug(const char* fileName, const char* flag);
+int fclosedebug(FILE* stream);
+
+#define fileopen fopen
+#define fileclose fclose
+
 char* readFile(char* fileName);
 int writeFile(const std::string& fileName, const std::string& text, bool append);
 
@@ -45,6 +52,7 @@ bool existDir(const char* dir);
 bool makeDir(const char* dir);
 bool checkFileCreation(const char* dir);
 bool removeFile(const char* file);
+bool removeDirectory(const char* path);
 __int64 fileSize(const char* file);
 long pageSize();
 

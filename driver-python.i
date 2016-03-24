@@ -21,6 +21,24 @@ namespace std {
    %template(StringVector) vector<std::string>;
 }
 
+%exception parse {
+   try {
+      $action
+   } catch (BSONParseException &e) {
+      PyErr_SetString(PyExc_IndexError, const_cast<char*>(e.what()));
+      return NULL;
+   }
+}
+
+%exception insert {
+   try {
+      $action
+   } catch (DjondbException &e) {
+      PyErr_SetString(PyExc_IndexError, const_cast<char*>(e.what()));
+      return NULL;
+   }
+}
+
 %exception remove {
    try {
       $action

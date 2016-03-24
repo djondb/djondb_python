@@ -32,12 +32,14 @@ class DjondbException: public std::exception {
 	public:
 		DjondbException(int code, const char* error);
 		DjondbException(const DjondbException& orig);
+		virtual ~DjondbException() _NOEXCEPT;
+
 		virtual const char* what() const throw();
 		int errorCode() const;
 
 	private:
 		int _errorCode;
-		const char* _errorMessage;
+		char* _errorMessage;
 };
 /*****************************************************************
   Type Definitions and macros
@@ -56,8 +58,14 @@ bool makedir(const char* path);
 std::string* getHomeDir();
 std::string getTempDir();
 
+char* getCurrentUsername();
+
 Version getCurrentVersion();
 Version getVersion(const char* version);
+
+typedef int (*ShutdownCallback)(void);
+int shutdownGracefully(int code);
+void registerShutdownCallback(ShutdownCallback callback);
 
 #ifndef LINUX
 int clock_gettime(int X, struct timespec *tv);

@@ -34,11 +34,26 @@ const int D_ERROR_NOTIMPLEMENTED = 102; //!< Elements not supported yet
 
 // 200 is reserved for system errors, these errors should be checked in development if reported
 const int D_ERROR_UNKNOWN = 200; //!< Reserved for null pointers
+const int D_ERROR_SYSTEMERROR = 201; //!< Reserved for any system error that is not related with the DB
+
+// 300 network errors
+const int D_ERROR_NET_UNKNOWN_DATA = 300; //!< Used when there's garbage in the network connection
+
+// 400 Internal errors these errors could be used as control points
+const int D_ERROR_UNKNOWN_TYPE = 400;
+const int D_ERROR_UNKNOWN_COMMAND = 401;
 
 // 600 is reserved for user errors
 const int D_ERROR_CONNECTION = 600;
 const int D_ERROR_INVALID_STATEMENT = 601;
 const int D_ERROR_MISSING_PARAMETERS = 602;
-const int D_ERROR_UPDATE_FAILED = 603;
+const int D_ERROR_INSERT_FAILED = 603;
+const int D_ERROR_UPDATE_FAILED = 604;
+const int D_ERROR_REMOVE_FAILED = 605;
+const int D_ERROR_CURSOR_INVALID_STATUS = 606;
+
+
+// 10000 reserved for errors in the driver
+const int D_ERROR_INVALIDTRANSACTION_STATE = 10001;
 
 #endif /* DJON_ERROR_CODES_INCLUDED_H */

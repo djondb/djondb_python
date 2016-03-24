@@ -13,6 +13,7 @@ const char* lastErrorDescription();
 int lastErrorCode();
 void clearError();
 
+
 // last error 7
 /******************************************************************/
 

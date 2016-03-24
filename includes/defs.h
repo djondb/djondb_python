@@ -48,6 +48,9 @@ typedef __int64           __LONG64;
 #define DEBUG
 #endif
 #endif
+#ifdef NDEBUG
+#define DEBUG 1
+#endif
 // #define TESTING
 
 #endif // DEFS_H_INCLUDED

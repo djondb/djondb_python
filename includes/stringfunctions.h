@@ -76,7 +76,9 @@ namespace djondb {
 	class string {
 		public:
 			string();
+			string(char* c);
 			string(char* c, __int32 len);
+			string(const char* c);
 			string(const char* c, __int32 len);
 			string(const string& str);
 			virtual ~string();
@@ -92,8 +94,8 @@ namespace djondb {
 
 			std::string str() const;
 
-			bool operator ==(const djondb::string& str);
-			bool operator !=(const djondb::string& str);
+			bool operator ==(const djondb::string& str) const;
+			bool operator !=(const djondb::string& str) const;
 			djondb::string& operator=(const djondb::string& rvar);
 
 		private:

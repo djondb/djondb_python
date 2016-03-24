@@ -25,19 +25,19 @@
 
 #include "list.h"
 
-struct F_XPathExpression {
+typedef struct F_XPathExpression {
 	char* xpath;
-};
+} F_XPathExpression;
 
 const int EXP_CONSTANT = 0;
 const int EXP_SIMPLE = 1;
 const int EXP_BINARY = 2;
 
-struct F_BinaryExpression {
+typedef struct F_BinaryExpression {
 	struct F_Expression* left;
 	char* oper;
 	struct F_Expression* right;
-};
+} F_BinaryExpression;
 
 const int CONST_INTEGER = 0;
 const int CONST_FLOAT = 1;

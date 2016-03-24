@@ -12025,7 +12025,14 @@ SWIGINTERN PyObject *_wrap_BSONParser_parse(PyObject *SWIGUNUSEDPARM(self), PyOb
     }
     arg1 = ptr;
   }
-  result = (BSONObj *)BSONParser::parse((std::string const &)*arg1);
+  {
+    try {
+      result = (BSONObj *)BSONParser::parse((std::string const &)*arg1);
+    } catch (BSONParseException &e) {
+      PyErr_SetString(PyExc_IndexError, const_cast<char*>(e.what()));
+      return NULL;
+    }
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_BSONObj, 0 |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;

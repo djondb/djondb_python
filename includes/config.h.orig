@@ -59,7 +59,11 @@
 #undef PACKAGE_URL
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "3.5.60324"
+<<<<<<< HEAD
+#define PACKAGE_VERSION "3.5.51208"
+=======
+#define PACKAGE_VERSION "3.5.51206"
+>>>>>>> 3682c04574b9f30335c81adf22353fc638ec30cd
 
 /* Define Profile variable */
 #undef PROFILE
@@ -68,4 +72,8 @@
 #undef STDC_HEADERS
 
 /* Version number of package */
-#define VERSION "3.5.60324"
+<<<<<<< HEAD
+#define VERSION "3.5.51208"
+=======
+#define VERSION "3.5.51206"
+>>>>>>> 3682c04574b9f30335c81adf22353fc638ec30cd
