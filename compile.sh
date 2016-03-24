@@ -39,7 +39,7 @@ python setup.py build
 if [ ! -z "${UPLOAD}" ]; 
 then
 	cd output
-	python setup.py register
+	#python setup.py register
 	#python setup.py build_ext --inplace
 	python setup.py sdist upload
 	#python setup.py bdist_dumb upload
