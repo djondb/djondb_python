@@ -14,7 +14,7 @@ class BaseExpression;
 
 class Index {
 	public:
-		Index() {};
+		Index();
 		virtual ~Index();
 
 		Index(const Index& orig);

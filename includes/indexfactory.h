@@ -18,6 +18,10 @@ typedef map<std::string, listAlgorithmsTypePtr> listByNSType;
 typedef listByNSType* listByNSTypePtr;
 typedef map<std::string, listByNSTypePtr> listByDbType;
 
+/*! \brief This is the entry point for all the index system. Important Note: the method shutdown has to be called to shutdown the index factory properly
+ * forcing all the indexes pending to be persisted
+ *
+ * */
 class IndexFactory
 {
     public:
@@ -52,6 +56,15 @@ class IndexFactory
 		  *
 		  **/
 		  void dropIndexByName(const char* db, const char* ns, const char* indexName);
+
+		  /*! \brief This has to be called to shutdown the index factory, forcing any pending index to be persisted gracefully
+		  *
+		  **/
+		  void shutdown();
+		  /*! \brief Force the pending indexes to be persisted
+		  *
+		  **/
+		  void persistIndexes();
     protected:
     private:
         IndexFactory();

@@ -42,6 +42,12 @@ typedef int64_t           __int64;
 typedef __int64           __LONG64;
 
 
+#ifdef LINUX
+#define _NOEXCEPT noexcept(true)
+#endif
+#ifdef WINDOWS
+#define _NOEXCEPT 
+#endif
 // Define DEBUG or RELEASE
 #ifdef WINDOWS
 #ifdef _DEBUG
