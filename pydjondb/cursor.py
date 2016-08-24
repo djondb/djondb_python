@@ -8,7 +8,6 @@ class CursorStatus:
 
 class DjondbCursor:
 	def __init__(self, net, cursorId, firstPage):
-		print("DjondbCursor page: %d" % len(firstPage))
 		self._net = net
 		self._cursorId = cursorId
 		self._rows = firstPage
