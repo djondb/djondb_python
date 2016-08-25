@@ -15,10 +15,12 @@ class CommandType:
 	CREATEINDEX = 13
 	BACKUP = 14
 	RCURSOR = 15
-	PERSISTINDEXES = 16 
+	PERSISTINDEXES = 16
+	EXECUTEQUERY = 17
+	EXECUTEUPDATE = 18
 
 class DjondbException(Exception):
-	def __init__(self, expression, message):
-		self.expression = expression
+	def __init__(self, code, message):
+		self.code = code
 		self.message = message
 

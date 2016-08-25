@@ -13,33 +13,93 @@ port = 1243
 con = DjondbConnection(host, port)
 con.open()
 
-result = con.showDbs()
 
-print("ShowDBS")
-print(result)
+def testInsert():
+	print('testInsert')
+	con.dropNamespace('testdb', 'testns')
 
-result = con.showNamespaces("testdb")
-print("ShowNamespaces")
-print(result)
+	con.insert('testdb', 'testns', { 'name': 'John', 'address': { 'type': 'home', 'number': 10, 'street': 'Ave 123' } })
 
-r = {}
-r["name"] = "John"
-r["lastName"] = "John"
+	c = con.find('testdb', 'testns', '*', '')
+	assert c.next(), 'find should return 1 record after the insert'
+	name = c.current()['name']
+	assert c.current()['name'] == 'John', 'Name should have John'
 
-for k in r.keys():
-	print("key: %s, type: %s" % (k, type(r[k])))
+def testUpdate():
+	print('testUpdate')
+	con.dropNamespace('testdb', 'testns')
 
-con.insert("testdb", "testns", r)
+	con.insert('testdb', 'testns', { 'name': 'John', 'address': { 'type': 'home', 'number': 10, 'street': 'Ave 123' } })
 
-cursor = con.find("testdb", "testns", "*", "")
-elementToRemove = None
-while cursor.next():
-	item = cursor.current()
-	elementToRemove = item
-	print(json.dumps(item))
+	c = con.find('testdb', 'testns', '*', '')
+	assert c.next(), 'find should return 1 record after the insert'
+	record = c.current()
+	record['age'] = 20
+	con.update('testdb', 'testns', record)
 
-con.remove("testdb", "testns", item["_id"], item["_revision"])
+	c = con.find('testdb', 'testns', '*', '')
+	assert c.next(), 'find should return 1 record after the update'
+	record = c.current()
+	assert record['age'] is 20
 
-con.dropNamespace("testdb", "testns")
+def testDQL():
+	print('testDQL')
+	con.executeQuery('drop ns "testdb", "testns"')
+	data = { 'name': 'John', 'age': 20, 'address': { 'type': 'home', 'number': 10, 'street': 'Ave 123' } }
+	con.executeQuery('insert %s into %s:%s' % (json.dumps(data), 'testdb', 'testns'))
+
+	cur = con.executeQuery('select * from %s:%s' % ('testdb', 'testns'))
+	assert cur.next(), 'select should return at least one record'
+	record = cur.current()
+	assert record['age'] is 20
+
+	print('testing wrong parse')
+	con.executeQuery('select bl bla x where')
+
+def testShowDBs():
+	print('testShowDBs')
+	dbs = con.executeQuery('show databases')
 
 
+def testOthers():
+	result = con.showDbs()
+
+	print("ShowDBS")
+	print(result)
+
+	result = con.showNamespaces("testdb")
+	print("ShowNamespaces")
+	print(result)
+
+	r = {}
+	r["name"] = "John"
+	r["lastName"] = "John"
+
+	for k in r.keys():
+		print("key: %s, type: %s" % (k, type(r[k])))
+
+	con.insert("testdb", "testns", r)
+
+	cursor = con.find("testdb", "testns", "*", "")
+	elementToRemove = None
+	while cursor.next():
+		item = cursor.current()
+		elementToRemove = item
+		print(json.dumps(item))
+
+	con.remove("testdb", "testns", item["_id"], item["_revision"])
+
+	con.dropNamespace("testdb", "testns")
+
+
+	print("testing dql")
+	con.executeQuery("insert {'name': 'John' } into TestDB:TestDQL")
+	cursor = con.executeQuery("select * from TestDB:TestDQL")
+	while cursor.next():
+		item = cursor.current()
+		print(json.dumps(item))
+
+
+testInsert()
+testUpdate()
+testDQL()

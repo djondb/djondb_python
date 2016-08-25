@@ -110,6 +110,12 @@ class Network:
 		self.bufferPos += 1
 		return chr(c)
 
+	def readBoolean(self):
+		self.checkBuffer(1)
+		res = self.buffer[self.bufferPos] is 1
+		self.bufferPos += 1 
+		return res
+
 	def readInt(self):
 		self.checkBuffer(4)
 		res = int_fromendian(self.buffer, self.bufferPos)

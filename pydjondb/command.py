@@ -6,6 +6,8 @@ import uuid
 class Command:
 	def __init__(self):
 		self._activeTransactionId = None
+		self.resultCode = 0
+		self.resultMessage = None
 
 	def writeHeader(self, net):
 		version = "3.5.60822"
@@ -18,9 +20,15 @@ class Command:
 		net.writeBSON(options)
 
 	def readErrorInformation(self, net):
-		resultCode = net.readInt()
-		if (resultCode > 0):
-			message = net.readString()
+		self.resultCode = net.readInt()
+		if (self.resultCode > 0):
+			self.resultMessage = net.readString()
+
+	def readResultDropNamespace(self, net):
+		result = net.readInt()
+
+		self.readErrorInformation(net)
+		return True
 
 	def dropNamespace(self, net, db, ns, transactionId = None):
 		net.reset()
@@ -30,11 +38,12 @@ class Command:
 		net.writeString(db)
 		net.writeString(ns)
 		net.flush()
+		return self.readResultDropNamespace(net)
 
-		result = net.readInt()
-
+	def readResultRemove(self, net):
 		self.readErrorInformation(net)
 		return True
+
 
 	def remove(self, net, db, ns, id, revision = None):
 		net.reset()
@@ -51,9 +60,16 @@ class Command:
 			net.writeString("")
 
 		net.flush()
+		return self.readResultRemove(net)
+
+	def readResultShowDbs(self, net):
+		results = net.readInt()
+		dbs = []
+		for x in range(0, results):
+			dbs.append(net.readString())
 
 		self.readErrorInformation(net)
-		return True
+		return dbs
 
 	def showDbs(self, net):
 		net.reset()
@@ -61,7 +77,10 @@ class Command:
 		net.writeInt(CommandType.SHOWDBS)
 		self.writeOptions(net)
 		net.flush()
+		return self.readResultShowDbs(net)
 
+
+	def readResultShowNamespaces(self, net):
 		results = net.readInt()
 		dbs = []
 		for x in range(0, results):
@@ -77,14 +96,12 @@ class Command:
 		self.writeOptions(net)
 		net.writeString(db)
 		net.flush()
+		return self.readResultShowNamespaces(net)
 
-		results = net.readInt()
-		dbs = []
-		for x in range(0, results):
-			dbs.append(net.readString())
 
+	def readResultInsert(self, net):
+		result = net.readInt()
 		self.readErrorInformation(net)
-		return dbs
 
 	def insert(self, net, db, ns, data):
 		net.reset()
@@ -95,9 +112,13 @@ class Command:
 		net.writeString(ns)
 		net.writeBSON(data)
 		net.flush()
+		self.readResultInsert(net)
 
-		result = net.readInt()
+
+	def readResultUpdate(self, net):
+		result = net.readBoolean()
 		self.readErrorInformation(net)
+
 
 	def update(self, net, db, ns, data):
 		net.reset()
@@ -108,9 +129,18 @@ class Command:
 		net.writeString(ns)
 		net.writeBSON(data)
 		net.flush()
+		self.readResultUpdate(net)
 
-		result = net.readInt()
+	def readResultFind(self, net):
+		cursorId = net.readString()
+		flag = net.readInt()
+		results = []
+		if flag is 1:
+			results = net.readBSONArray()
+
+		result = cursor.DjondbCursor(net, cursorId, results)
 		self.readErrorInformation(net)
+		return result
 
 	def find(self, net, db, ns, select, filter):
 		net.reset()
@@ -122,25 +152,9 @@ class Command:
 		net.writeString(filter)
 		net.writeString(select)
 		net.flush()
+		return self.readResultFind(net)
 
-		cursorId = net.readString()
-		flag = net.readInt()
-		results = []
-		if flag is 1:
-			results = net.readBSONArray()
-
-		result = cursor.DjondbCursor(net, cursorId, results)
-		self.readErrorInformation(net)
-		return result
-
-	def fetchRecords(self, net, cursorId):
-		net.reset()
-		self.writeHeader(net)
-		net.writeInt(CommandType.FETCHCURSOR) # find command
-		self.writeOptions(net)
-		net.writeString(cursorId)
-		net.flush()
-
+	def readResultFetchRecords(self, net):
 		flag = net.readInt();
 		results = None
 		if flag is 1:
@@ -150,8 +164,20 @@ class Command:
 
 		return results
 
+	def fetchRecords(self, net, cursorId):
+		net.reset()
+		self.writeHeader(net)
+		net.writeInt(CommandType.FETCHCURSOR) # find command
+		self.writeOptions(net)
+		net.writeString(cursorId)
+		net.flush()
+		return self.readResultFetchRecords(net)
+
 	def beginTransaction(self):
 		_activeTransactionId = uuid.uuid4()
+
+	def readResultCommitTransaction(self, net):
+		self.readErrorInformation(net)
 
 	def commitTransaction(self):
 		if _activeTransactionId is not None:
@@ -162,10 +188,13 @@ class Command:
 			net.writeString(_activeTransactionId)
 			net.flush()
 
-			self.readErrorInformation(net)
+			self.readResultCommitTransaction(net)
 			_activeTransactionId = None
 		else:
 			raise DjondbException('Nothing to commit, you need beginTransaction before committing or rollback')
+
+	def readResultRollbackTransaction(self, net):
+		self.readErrorInformation(net)
 
 	def rollbackTransaction(self):
 		if _activeTransactionId is not None:
@@ -176,10 +205,13 @@ class Command:
 			net.writeString(_activeTransactionId)
 			net.flush()
 
-			self.readErrorInformation(net)
+			self.readResultRollbackTransaction(net)
 			_activeTransactionId = None
 		else:
 			raise DjondbException('Nothing to rollback, you need beginTransaction before committing or rollback')
+
+	def readResultCreateIndex(self, net):
+		self.readErrorInformation(net)
 
 	def createIndex(self, indexDef):
 		net.reset()
@@ -188,8 +220,12 @@ class Command:
 		self.writeOptions(net)
 		net.writeBSON(indexDef)
 		net.flush()
+		return readResultCreateIndex(net)
 
+	def readResultBackup(self, net):
+		result =  self.readInt()
 		self.readErrorInformation(net)
+		return result
 
 	def backup(self, db, destFile):
 		net.reset()
@@ -199,10 +235,104 @@ class Command:
 		self.writeString(db)
 		self.writeString(destFile)
 		net.flush()
+		return self.readResultBackup(net)
 
-		result =  self.readInt()
-		self.readErrorInformation(net)
-		return result
 
+	def executeQuery(self, net, query):
+		net.reset()
+		self.writeHeader(net)
+		net.writeInt(CommandType.EXECUTEQUERY) # executequery command
+		self.writeOptions(net)
+		net.writeString(query)
+		net.flush()
+
+		flag = net.readInt()
+		if flag is 1:
+			commandType = net.readInt();
+			if commandType is CommandType.INSERT:
+				return self.readResultInsert(net)
+
+			if commandType is CommandType.UPDATE:
+				return self.readResultUpdate(net)
+
+			if commandType is CommandType.FIND:
+				return self.readResultFind(net)
+
+			if commandType is CommandType.DROPNAMESPACE:
+				return self.readResultDropNamespace(net)
+
+			if commandType is CommandType.SHOWDBS:
+				return self.readResultShowDbs(net)
+
+			if commandType is CommandType.SHOWNAMESPACES:
+				return self.readResultShowNamespaces(net)
+
+			if commandType is CommandType.REMOVE:
+				return self.readResultRemove(net)
+
+			if commandType is CommandType.COMMIT:
+				res = self.readResultCommitTransaction(net)
+				_activeTransactionId = None
+				return res
+
+			if commandType is CommandType.ROLLBACK:
+				res = self.readResultRollbackTransaction(net)
+				_activeTransactionId = None
+				return res
+
+			if commandType is CommandType.FETCHCURSOR:
+				return self.readResultFetchRecords(net)
+
+			if commandType is CommandType.CREATEINDEX:
+				return self.readResultCreateIndex(net)
+
+			if commandType is CommandType.BACKUP:
+				return self.readResultBackup(net)
+		else:
+			self.readErrorInformation(net)
+		return None
+
+
+	def executeUpdate(self, net, query):
+		net.reset()
+		self.writeHeader(net)
+		net.writeInt(CommandType.EXECUTEUPDATE) # executeupdate command
+		self.writeOptions(net)
+		net.writeString(query)
+		net.flush()
+
+		flag = net.readInt()
+		if flag is 1:
+			commandType = net.readInt();
+			if commandType is CommandType.INSERT:
+				return self.readResultInsert(net)
+
+			if commandType is CommandType.UPDATE:
+				return self.readResultUpdate(net)
+
+			if commandType is CommandType.DROPNAMESPACE:
+				return self.readResultDropNamespace(net)
+
+			if commandType is CommandType.REMOVE:
+				return self.readResultRemove(net)
+
+			if commandType is CommandType.COMMIT:
+				res = self.readResultCommitTransaction(net)
+				_activeTransactionId = None
+				return res
+
+			if commandType is CommandType.ROLLBACK:
+				res = self.readResultRollbackTransaction(net)
+				_activeTransactionId = None
+				return res
+
+			if commandType is CommandType.CREATEINDEX:
+				return self.readResultCreateIndex(net)
+
+			if commandType is CommandType.BACKUP:
+				return self.readResultBackup(net)
+		else:
+			self.readErrorInformation(net)
+		return None
 
 
