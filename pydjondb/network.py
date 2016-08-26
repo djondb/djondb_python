@@ -9,11 +9,19 @@ def int_fromendian(buffer, pos):
 	res =struct.unpack_from('<i', buffer, pos)
 	return res[0]
 
+def double_fromendian(buffer, pos):
+	res =struct.unpack_from('<d', buffer, pos)
+	return res[0]
+
 def long_toendian(val):
 	res =struct.pack('<q', val)
 	return res
 
 def int_toendian(val):
+	res = struct.pack('<i', val)
+	return res
+
+def double_toendian(val):
 	res = struct.pack('<i', val)
 	return res
 
@@ -37,10 +45,16 @@ class Network:
 		self.bufferLen += 4
 
 	def writeBool(self, val):
-		pass
+		self.checkBuffer(1)
+		if val is True:
+			self.buffer.append(1)
+		else:
+			self.buffer.append(0)
+		self.bufferPos += 1 
 
 	def writeDouble(self, val):
-		pass
+		self.buffer.extend(double_toendian(val))
+		self.bufferLen += 8 
 
 	def writeLong(self, val):
 		self.buffer.extend(long_toendian(val))
@@ -99,6 +113,8 @@ class Network:
 				val = self.readString()
 			if datatype is 5:
 				val = self.readBSON()
+			if datatype is 6:
+				val = self.readBSONArray()
 			if datatype is 10:
 				val = self.readBoolean()
 			result[key] = val
@@ -125,6 +141,12 @@ class Network:
 	def readLong(self):
 		self.checkBuffer(8)
 		res = long_fromendian(self.buffer, self.bufferPos)
+		self.bufferPos += 8 
+		return res
+
+	def readDouble(self):
+		self.checkBuffer(8)
+		res = double_fromendian(self.buffer, self.bufferPos)
 		self.bufferPos += 8 
 		return res
 
