@@ -103,8 +103,18 @@ def testOthers():
 	while cursor.next():
 		item = cursor.current()
 		print(json.dumps(item))
+def testTransaction():
+	con.beginTransaction()
+
+	con.insert('TestDB', 'TestTX', { "name": "Test" })
+	con.commitTransaction()
+
+	con.beginTransaction()
+	con.insert('TestDB', 'TestTX', { "name": "Test2" })
+	con.rollbackTransaction()
 
 
 testInsert()
 testUpdate()
 testDQL()
+testTransaction()

@@ -175,13 +175,12 @@ class Command:
 		return self.readResultFetchRecords(net)
 
 	def beginTransaction(self):
-		_activeTransactionId = uuid.uuid4()
+		self._activeTransactionId = str(uuid.uuid4())
 
 	def readResultCommitTransaction(self, net):
 		self.readErrorInformation(net)
 
-	def commitTransaction(self):
-		print('_activeTransactionId: %s' % self._activeTransactionId)
+	def commitTransaction(self, net):
 		if self._activeTransactionId is not None:
 			net.reset()
 			self.writeHeader(net)
@@ -198,7 +197,7 @@ class Command:
 	def readResultRollbackTransaction(self, net):
 		self.readErrorInformation(net)
 
-	def rollbackTransaction(self):
+	def rollbackTransaction(self, net):
 		if self._activeTransactionId is not None:
 			net.reset()
 			self.writeHeader(net)
@@ -290,11 +289,11 @@ class Command:
 
 			if commandType is CommandType.COMMIT:
 				self.readResultCommitTransaction(net)
-				_activeTransactionId = None
+				self._activeTransactionId = None
 
 			if commandType is CommandType.ROLLBACK:
 				self.readResultRollbackTransaction(net)
-				_activeTransactionId = None
+				self._activeTransactionId = None
 
 			if commandType is CommandType.FETCHCURSOR:
 				self.readResultFetchRecords(net)
@@ -343,12 +342,12 @@ class Command:
 
 			if commandType is CommandType.COMMIT:
 				res = self.readResultCommitTransaction(net)
-				_activeTransactionId = None
+				self._activeTransactionId = None
 				return res
 
 			if commandType is CommandType.ROLLBACK:
 				res = self.readResultRollbackTransaction(net)
-				_activeTransactionId = None
+				self._activeTransactionId = None
 				return res
 
 			if commandType is CommandType.CREATEINDEX:

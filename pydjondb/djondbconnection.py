@@ -54,12 +54,12 @@ class DjondbConnection:
 		self._activeTransactionId = self.cmd.beginTransaction()
 		
 	def commitTransaction(self):
-		self.cmd.commitTransaction()
+		self.cmd.commitTransaction(self.network)
 		self._activeTransactionId = None
 		self.checkError(self.cmd)
 		
 	def rollbackTransaction(self):
-		self.cmd.rollbackTransaction()
+		self.cmd.rollbackTransaction(self.network)
 		self._activeTransactionId = None
 		self.checkError(self.cmd)
 
