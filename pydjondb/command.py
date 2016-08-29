@@ -2,6 +2,7 @@ from defs import *
 import network
 import cursor
 import uuid
+import datetime
 
 class Command:
 	def __init__(self):
@@ -247,41 +248,55 @@ class Command:
 		net.flush()
 
 		flag = net.readInt()
+		cursorResult = None
 		if flag is 1:
 			commandType = net.readInt();
 			if commandType is CommandType.INSERT:
-				return self.readResultInsert(net)
+				self.readResultInsert(net)
 
 			if commandType is CommandType.UPDATE:
-				return self.readResultUpdate(net)
+				self.readResultUpdate(net)
 
 			if commandType is CommandType.FIND:
-				return self.readResultFind(net)
+				cursorResult = self.readResultFind(net)
 
 			if commandType is CommandType.DROPNAMESPACE:
-				return self.readResultDropNamespace(net)
+				self.readResultDropNamespace(net)
 
 			if commandType is CommandType.SHOWDBS:
-				return self.readResultShowDbs(net)
+				dbs = self.readResultShowDbs(net)
+				arrDbs = []
+				for db in dbs:
+					row = {}
+					row["db"] = db
+					arrDbs.append(row)
+				cursorId = None
+				cursorResult = cursor.DjondbCursor(net, cursorId, arrDbs)
+
 
 			if commandType is CommandType.SHOWNAMESPACES:
-				return self.readResultShowNamespaces(net)
+				nss = self.readResultShowNamespaces(net)
+				arrNs = []
+				for ns in nss:
+					row = {}
+					row["ns"] = ns
+					arrNs.append(row)
+				cursorId = None
+				cursorResult = cursor.DjondbCursor(net, cursorId, arrNs)
 
 			if commandType is CommandType.REMOVE:
-				return self.readResultRemove(net)
+				self.readResultRemove(net)
 
 			if commandType is CommandType.COMMIT:
-				res = self.readResultCommitTransaction(net)
+				self.readResultCommitTransaction(net)
 				_activeTransactionId = None
-				return res
 
 			if commandType is CommandType.ROLLBACK:
-				res = self.readResultRollbackTransaction(net)
+				self.readResultRollbackTransaction(net)
 				_activeTransactionId = None
-				return res
 
 			if commandType is CommandType.FETCHCURSOR:
-				return self.readResultFetchRecords(net)
+				self.readResultFetchRecords(net)
 
 			if commandType is CommandType.CREATEINDEX:
 				return self.readResultCreateIndex(net)
@@ -290,7 +305,16 @@ class Command:
 				return self.readResultBackup(net)
 		else:
 			self.readErrorInformation(net)
-		return None
+
+		if cursorResult is None:
+			arr = []
+			row = {}
+			row["date"] = str(datetime.date.today())
+			row["success"] = True
+			arr.append(row)
+			cursorResult = cursor.DjondbCursor(net, None, arr)
+
+		return cursorResult
 
 
 	def executeUpdate(self, net, query):

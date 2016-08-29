@@ -7,7 +7,7 @@ class CursorStatus:
 	CS_CLOSED = 3
 
 class DjondbCursor:
-	def __init__(self, net, cursorId, firstPage):
+	def __init__(self, net, cursorId=None, firstPage=None):
 		self._net = net
 		self._cursorId = cursorId
 		self._rows = firstPage
@@ -44,6 +44,17 @@ class DjondbCursor:
 			else:
 				result = false;
 
+		return result
+
+	def previous(self):
+		if self._status == CursorStatus.CS_CLOSED:
+			raise DjondbException('Cursor is closed')
+		result = True
+		if self._count > 0 and self._position > 0:
+			self._position -= 1
+			self._current = self._rows[self._position]
+		else:
+			result = False
 		return result
 
 	def current(self):

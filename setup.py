@@ -7,7 +7,7 @@ setup.py file for djondb python driver
 from distutils.core import setup, Extension
 
 setup (name = 'pydjondb',
-		version = '3.5.60824',
+		version = '3.5.608293',
 		author      = "Cross",
 		author_email = "cross@djondb.com",
 		license = "GPL",

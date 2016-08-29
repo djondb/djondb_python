@@ -65,29 +65,39 @@ class Network:
 		for key in data.keys():
 			self.writeString(key)
 			val = data[key]
+			isSet = False
 			if type(val) is int:
 				self.writeLong(0)
 				self.writeInt(val)
+				isSet = True
 
 			if type(val) is float:
 				self.writeLong(1)
 				self.writeDouble(val)
+				isSet = True
 
 			if type(val) is long:
 				self.writeLong(2)
 				self.writeLong(val)
+				isSet = True
 
 			if type(val) is str:
 				self.writeLong(4)
 				self.writeString(val)
+				isSet = True
 
 			if type(val) is dict:
 				self.writeLong(5)
 				self.writeBSON(val)
+				isSet = True
 
 			if type(val) is bool:
 				self.writeLong(10)
 				self.writeBool(val)
+				isSet = True
+
+			if not isSet:
+				raise DjondbException(601, 'Unsupported datatype %s' % type(val)) 
 
 	def readBSONArray(self):
 		elements = self.readLong()

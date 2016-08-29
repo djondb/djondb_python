@@ -54,7 +54,12 @@ def testDQL():
 	assert record['age'] is 20
 
 	print('testing wrong parse')
-	con.executeQuery('select bl bla x where')
+	try:
+		con.executeQuery('select bl bla x where')
+		raise Exception('Expecting an error')
+	except DjondbException as e:
+		pass
+
 
 def testShowDBs():
 	print('testShowDBs')
