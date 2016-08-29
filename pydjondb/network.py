@@ -1,5 +1,6 @@
 import socket
 import struct
+from defs import *
 
 def long_fromendian(buffer, pos):
 	res =struct.unpack_from('<q', buffer, pos)
@@ -84,6 +85,11 @@ class Network:
 			if type(val) is str:
 				self.writeLong(4)
 				self.writeString(val)
+				isSet = True
+
+			if type(val) is unicode:
+				self.writeLong(4)
+				self.writeString(val.encode('utf-8'))
 				isSet = True
 
 			if type(val) is dict:

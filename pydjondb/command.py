@@ -181,35 +181,36 @@ class Command:
 		self.readErrorInformation(net)
 
 	def commitTransaction(self):
-		if _activeTransactionId is not None:
+		print('_activeTransactionId: %s' % self._activeTransactionId)
+		if self._activeTransactionId is not None:
 			net.reset()
 			self.writeHeader(net)
 			net.writeInt(CommandType.COMMIT) # find command
 			self.writeOptions(net)
-			net.writeString(_activeTransactionId)
+			net.writeString(self._activeTransactionId)
 			net.flush()
 
 			self.readResultCommitTransaction(net)
-			_activeTransactionId = None
+			self._activeTransactionId = None
 		else:
-			raise DjondbException('Nothing to commit, you need beginTransaction before committing or rollback')
+			raise DjondbException(10001, 'Nothing to commit, you need beginTransaction before committing or rollback')
 
 	def readResultRollbackTransaction(self, net):
 		self.readErrorInformation(net)
 
 	def rollbackTransaction(self):
-		if _activeTransactionId is not None:
+		if self._activeTransactionId is not None:
 			net.reset()
 			self.writeHeader(net)
 			net.writeInt(CommandType.ROLLBACK) # find command
 			self.writeOptions(net)
-			net.writeString(_activeTransactionId)
+			net.writeString(self._activeTransactionId)
 			net.flush()
 
 			self.readResultRollbackTransaction(net)
-			_activeTransactionId = None
+			self._activeTransactionId = None
 		else:
-			raise DjondbException('Nothing to rollback, you need beginTransaction before committing or rollback')
+			raise DjondbException(10001, 'Nothing to rollback, you need beginTransaction before committing or rollback')
 
 	def readResultCreateIndex(self, net):
 		self.readErrorInformation(net)
