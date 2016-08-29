@@ -89,7 +89,7 @@ class Network:
 
 			if type(val) is unicode:
 				self.writeLong(4)
-				self.writeString(val.encode('utf-8'))
+				self.writeString(val.encode('utf-8').strip())
 				isSet = True
 
 			if type(val) is dict:
