@@ -42,8 +42,9 @@ class Command:
 		return self.readResultDropNamespace(net)
 
 	def readResultRemove(self, net):
+		res = net.readBoolean()
 		self.readErrorInformation(net)
-		return True
+		return res
 
 
 	def remove(self, net, db, ns, id, revision = None):
@@ -265,6 +266,7 @@ class Command:
 
 			if commandType is CommandType.SHOWDBS:
 				dbs = self.readResultShowDbs(net)
+				self.readErrorInformation(net)
 				arrDbs = []
 				for db in dbs:
 					row = {}
@@ -276,6 +278,7 @@ class Command:
 
 			if commandType is CommandType.SHOWNAMESPACES:
 				nss = self.readResultShowNamespaces(net)
+				self.readErrorInformation(net)
 				arrNs = []
 				for ns in nss:
 					row = {}

@@ -13,7 +13,7 @@ class DjondbConnection:
 
 	def open(self):
 		self.network = network.Network()
-		self.network.connect("localhost", 1243)
+		self.network.connect(self.host, self.port)
 
 	def showDbs(self):
 		res = self.cmd.showDbs(self.network)

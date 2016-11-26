@@ -38,7 +38,7 @@ class Network:
 
 	def writeString(self, data):
 		self.writeInt(len(data))
-		self.buffer.extend(data)
+		self.buffer.extend(data.encode('utf-8').strip())
 		self.bufferLen += len(data)
 
 	def writeInt(self, val):
@@ -64,7 +64,7 @@ class Network:
 	def writeBSON(self, data):
 		self.writeLong(len(data))
 		for key in data.keys():
-			self.writeString(key)
+			self.writeString(key.encode('utf-8').strip())
 			val = data[key]
 			isSet = False
 			if type(val) is int:
