@@ -25,6 +25,20 @@ class TestPyDjondb(unittest.TestCase):
 		assert c.next(), 'find should return 1 record after the insert'
 		name = c.current()['name']
 		assert c.current()['name'] == 'John', 'Name should have John'
+		print('~testInsert')
+
+#	def testInsertWithArrays(self):
+#		print('testInsertWithArrays')
+#		con.dropNamespace('testdb', 'testns')
+#
+#		con.insert('testdb', 'testns', { 'name': 'John', 'address': { 'type': 'home', 'number': 10, 'street': 'Ave 123', "array": [{"test": "Blah"}] } })
+#
+#		c = con.find('testdb', 'testns', '*', '')
+#		assert c.next(), 'find should return 1 record after the insert'
+#		array = c.current()['array']
+#		self.assertIsNotNone(array)
+#		assert c.current()['array'] == 'John', 'Name should have John'
+#		print('~testInsertWithArrays')
 
 	def testUpdate(self):
 		print('testUpdate')
@@ -42,6 +56,7 @@ class TestPyDjondb(unittest.TestCase):
 		assert c.next(), 'find should return 1 record after the update'
 		record = c.current()
 		assert record['age'] is 20
+		print('~testUpdate')
 
 	def testDQL(self):
 		print('testDQL')
@@ -60,12 +75,13 @@ class TestPyDjondb(unittest.TestCase):
 			raise Exception('Expecting an error')
 		except DjondbException as e:
 			pass
+		print('~testDQL')
 
 
 	def testShowDBs(self):
 		print('testShowDBs')
 		dbs = con.executeQuery('show databases')
-
+		print('~testShowDBs')
 
 	def testOthers(self):
 		print("testOthers")
@@ -85,21 +101,29 @@ class TestPyDjondb(unittest.TestCase):
 		for k in r.keys():
 			print("key: %s, type: %s" % (k, type(r[k])))
 
+		print("test insert")
 		con.insert("testdb", "testns", r)
 
+		print("test find")
 		cursor = con.find("testdb", "testns", "*", "")
 		elementToRemove = None
+		print("iterating cursor")
 		while cursor.next():
 			item = cursor.current()
 			elementToRemove = item
 			print(json.dumps(item))
 
+		print("removing elements")
 		con.remove("testdb", "testns", item["_id"], item["_revision"])
 
 		# test unexisting element
-		result = con.remove("testdb", "testns", "ablch", item["_revision"])
+		print("removing unexisting elements")
+		try:
+			result = con.remove("testdb", "testns", "ablch", item["_revision"])
+		except:
+			pass
 
-
+		print("dropping namespace")
 		con.dropNamespace("testdb", "testns")
 
 		print("testing dql")
@@ -108,8 +132,10 @@ class TestPyDjondb(unittest.TestCase):
 		while cursor.next():
 			item = cursor.current()
 			print(json.dumps(item))
+		print("~testOthers")
 
 	def testTransaction(self):
+		print("testTransaction")
 		con.beginTransaction()
 
 		con.insert('TestDB', 'TestTX', { "name": "Test" })
@@ -118,6 +144,7 @@ class TestPyDjondb(unittest.TestCase):
 		con.beginTransaction()
 		con.insert('TestDB', 'TestTX', { "name": "Test2" })
 		con.rollbackTransaction()
+		print("~testTransaction")
 
 
 if __name__ == '__main__':

@@ -1,6 +1,15 @@
 import network
 from command import *
 
+class DjondbException(Exception):
+	def __init__(self, resultCode, message):
+		self.resultCode = resultCode
+		self.message = message
+
+	def __str__(self):
+		return "Exception Code: %d, Message: %s" % (self.resultCode, self.message)
+
+
 class DjondbConnection:
 	def __init__(self, host, port = 1423):
 		self.host = host

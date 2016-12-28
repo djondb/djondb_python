@@ -1,6 +1,6 @@
 import socket
 import struct
-from defs import *
+import defs
 
 def long_fromendian(buffer, pos):
 	res =struct.unpack_from('<q', buffer, pos)
@@ -103,7 +103,7 @@ class Network:
 				isSet = True
 
 			if not isSet:
-				raise DjondbException(601, 'Unsupported datatype %s' % type(val)) 
+				raise defs.DjondbException(601, 'Unsupported datatype %s' % type(val)) 
 
 	def readBSONArray(self):
 		elements = self.readLong()
