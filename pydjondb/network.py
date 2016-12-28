@@ -61,6 +61,14 @@ class Network:
 		self.buffer.extend(long_toendian(val))
 		self.bufferLen += 8
 
+	def writeBSONArray(self, data):
+		arraySize = len(data)
+		self.writeLong(arraySize)
+		for x in range(0, arraySize):
+			bson = data[x]
+			self.writeBSON(bson)
+
+
 	def writeBSON(self, data):
 		self.writeLong(len(data))
 		for key in data.keys():
@@ -100,6 +108,11 @@ class Network:
 			if type(val) is bool:
 				self.writeLong(10)
 				self.writeBool(val)
+				isSet = True
+
+			if type(val) is list:
+				self.writeLong(6)
+				self.writeBSONArray(val)
 				isSet = True
 
 			if not isSet:

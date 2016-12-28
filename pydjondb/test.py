@@ -27,18 +27,25 @@ class TestPyDjondb(unittest.TestCase):
 		assert c.current()['name'] == 'John', 'Name should have John'
 		print('~testInsert')
 
-#	def testInsertWithArrays(self):
-#		print('testInsertWithArrays')
-#		con.dropNamespace('testdb', 'testns')
-#
-#		con.insert('testdb', 'testns', { 'name': 'John', 'address': { 'type': 'home', 'number': 10, 'street': 'Ave 123', "array": [{"test": "Blah"}] } })
-#
-#		c = con.find('testdb', 'testns', '*', '')
-#		assert c.next(), 'find should return 1 record after the insert'
-#		array = c.current()['array']
-#		self.assertIsNotNone(array)
-#		assert c.current()['array'] == 'John', 'Name should have John'
-#		print('~testInsertWithArrays')
+	def testInsertWithArrays(self):
+		print('testInsertWithArrays')
+		con.dropNamespace('testdb', 'testns')
+
+		data = {}
+		data["name"] = "John"
+		array = []
+		array.append({ "test": "Mary"})
+		data["array"] = array
+
+		con.insert('testdb', 'testns', data)
+
+		c = con.find('testdb', 'testns', '*', '')
+		assert c.next(), 'find should return 1 record after the insert'
+		array = c.current()['array']
+		self.assertIsNotNone(array)
+		assert len(array) == 1, 'Array should contain 1 element'
+		assert array[0]["test"] == 'Mary', 'Name should have Mary'
+		print('~testInsertWithArrays')
 
 	def testUpdate(self):
 		print('testUpdate')
