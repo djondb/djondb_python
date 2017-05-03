@@ -11,7 +11,7 @@ class DjondbException(Exception):
 
 
 class DjondbConnection:
-	def __init__(self, host, port = 1423):
+	def __init__(self, host, port = 1243):
 		self.host = host
 		self.port = port
 		self.cmd = Command()

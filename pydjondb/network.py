@@ -2,16 +2,16 @@ import socket
 import struct
 import defs
 
-def long_fromendian(buffer, pos):
-	res =struct.unpack_from('<q', buffer, pos)
+def long_fromendian(b, pos):
+	res =struct.unpack_from('<q', buffer(b), pos)
 	return res[0]
 
-def int_fromendian(buffer, pos):
-	res =struct.unpack_from('<i', buffer, pos)
+def int_fromendian(b, pos):
+	res =struct.unpack_from('<i', buffer(b), pos)
 	return res[0]
 
-def double_fromendian(buffer, pos):
-	res =struct.unpack_from('<d', buffer, pos)
+def double_fromendian(b, pos):
+	res =struct.unpack_from('<d', buffer(b), pos)
 	return res[0]
 
 def long_toendian(val):

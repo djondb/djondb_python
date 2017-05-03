@@ -302,10 +302,10 @@ class Command:
 				self.readResultFetchRecords(net)
 
 			if commandType is CommandType.CREATEINDEX:
-				return self.readResultCreateIndex(net)
+				self.readResultCreateIndex(net)
 
 			if commandType is CommandType.BACKUP:
-				return self.readResultBackup(net)
+				self.readResultBackup(net)
 		else:
 			self.readErrorInformation(net)
 

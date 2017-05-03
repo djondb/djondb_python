@@ -42,7 +42,7 @@ class DjondbCursor:
 					self._count = len(self._rows)
 					result = self.next()
 			else:
-				result = false;
+				result = False;
 
 		return result
 
