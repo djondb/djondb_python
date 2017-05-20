@@ -23,7 +23,7 @@ def int_toendian(val):
 	return res
 
 def double_toendian(val):
-	res = struct.pack('<i', val)
+	res = struct.pack('<d', val)
 	return res
 
 class Network:

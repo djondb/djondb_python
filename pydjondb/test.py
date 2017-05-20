@@ -1,6 +1,5 @@
 import unittest
 from djondbconnection import *
-from bson import *
 import json
 
 host = "localhost"
@@ -19,12 +18,16 @@ class TestPyDjondb(unittest.TestCase):
 		print('testInsert')
 		con.dropNamespace('testdb', 'testns')
 
-		con.insert('testdb', 'testns', { 'name': 'John', 'address': { 'type': 'home', 'number': 10, 'street': 'Ave 123' } })
+		#con.insert('testdb', 'testns', { 'name': 'John', 'address': { 'type': 'home', 'number': 10, 'street': 'Ave 123' }})
+		con.insert('testdb', 'testns', { 'name': 'John', 'address': { 'type': 'home', 'number': 10, 'street': 'Ave 123' }, 'salary': 12002.232 })
 
 		c = con.find('testdb', 'testns', '*', '')
 		assert c.next(), 'find should return 1 record after the insert'
 		name = c.current()['name']
 		assert c.current()['name'] == 'John', 'Name should have John'
+		assert 'salary' in c.current()
+		salary = c.current()['salary']
+		assert 12002.232 == c.current()['salary']
 		print('~testInsert')
 
 	def testInsertWithArrays(self):
